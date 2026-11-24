@@ -1,7 +1,7 @@
 export const night = {
   kicker: 'Mod noapte',
   title: 'Cum vede telefonul în întuneric?',
-  lead: 'Pe întuneric, senzorul primește puțină lumină, iar poza iese plină de zgomot. Telefonul face mai multe poze rapide și le mediază: zgomotul, fiind aleator, se anulează în mare parte, iar imaginea rămâne.',
+  lead: 'Pe întuneric poza iese plină de zgomot. Telefonul face mai multe cadre și le mediază: zgomotul se anulează, imaginea rămâne. Mută sliderul.',
   how: 'Scena e luminată slab (câștig mic), iar fiecare cadru primește zgomot gaussian. După ce combinăm cadrele, o luminăm la loc. Lucrăm în tonuri de gri și la maximum 320 px, ca numerele să se potrivească cu cele de la laborator (Python/OpenCV).',
   frames: 'câte cadre mediem (N)',
   sigma: 'zgomotul senzorului (σ)',
@@ -59,7 +59,7 @@ export const night = {
 export const portrait = {
   kicker: 'Portret',
   title: 'Portret cu fundal neclar',
-  lead: 'Telefonul decide, pixel cu pixel, ce e persoană și ce e fundal, apoi încețoșează doar fundalul. Începe cu o mască făcută de mână, vezi unde greșește, apoi folosește un model.',
+  lead: 'Telefonul decide pixel cu pixel ce e persoană și încețoșează doar fundalul. Încearcă întâi o mască făcută de mână, apoi un model.',
   soon: 'În curând',
   sample: 'Imagine de probă (desenată din cod), nu o fotografie reală. Poți încărca propriul portret sau poți face o poză acum.',
   steps: ['1 · Mască de mână', '2 · Limitele', '3 · Modelul', '4 · Fundal neclar'],

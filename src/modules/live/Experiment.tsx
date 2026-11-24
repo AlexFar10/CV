@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Card, DemoButton, FinePrint } from '../../components/ui/primitives'
+import { DemoButton, FinePrint } from '../../components/ui/primitives'
 import { live } from '../../content/live'
 import type { State } from '../../lib/drowsy'
 
@@ -20,9 +20,8 @@ export function Experiment({ current }: { current: State }) {
   }
 
   return (
-    <Card>
-      <h3 className="text-xl font-bold tracking-tight">{ex.title}</h3>
-      <p className="mt-1 text-sm text-ink-muted">{ex.lead}</p>
+    <div>
+      <p className="text-sm text-ink-muted">{ex.lead}</p>
 
       <div className="mt-4 rounded-xl border border-line bg-paper-subtle p-4">
         <p className="font-mono text-xs text-ink-muted">{ex.stepOf(step + 1, ex.steps.length)}</p>
@@ -63,6 +62,6 @@ export function Experiment({ current }: { current: State }) {
           <p>{ex.part2}</p>
         </div>
       ) : null}
-    </Card>
+    </div>
   )
 }

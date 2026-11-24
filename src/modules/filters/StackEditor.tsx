@@ -2,7 +2,7 @@ import { ArrowDown, ArrowUp, Trash2 } from 'lucide-react'
 import { FILTERS, FILTER_BY_ID, defaultParams, type FilterId, type StackItem } from '../../lib/filters'
 import { BUILT_IN, nextUid, toStack } from '../../lib/presets'
 import { filterText, kindLabel, presetNames, studioText } from '../../content/filters'
-import { Badge, DemoButton, cx } from '../../components/ui/primitives'
+import { DemoButton, cx } from '../../components/ui/primitives'
 import { LabeledSlider } from '../../components/ui/LabeledSlider'
 
 interface Props {
@@ -52,7 +52,6 @@ export function StackEditor({ stack, onChange }: Props) {
           </button>
         ))}
       </div>
-      <p className="mt-3 text-xs text-ink-muted">{studioText.rule}</p>
 
       {stack.length === 0 ? <p className="mt-5 rounded-xl border border-dashed border-line p-4 text-sm text-ink-muted">{studioText.empty}</p> : null}
 
@@ -65,7 +64,7 @@ export function StackEditor({ stack, onChange }: Props) {
               <div className="flex flex-wrap items-center gap-2">
                 <span className="font-mono text-xs text-ink-muted">{i + 1}.</span>
                 <h3 className="text-base font-semibold">{tx.name}</h3>
-                <Badge tone={def.kind === 'kernel' ? 'soft' : 'line'}>{kindLabel[def.kind]}</Badge>
+                <span className="font-mono text-[11px] text-ink-muted">{kindLabel[def.kind]}</span>
                 <div className="ml-auto flex items-center gap-1">
                   <label className="mr-1 flex cursor-pointer items-center gap-1 text-xs text-ink-muted">
                     <input
@@ -89,7 +88,6 @@ export function StackEditor({ stack, onChange }: Props) {
                 </div>
               </div>
               <pre className="mt-2 overflow-x-auto rounded-lg bg-paper-subtle px-3 py-2 font-mono text-[12px] leading-relaxed whitespace-pre-wrap">{tx.formula}</pre>
-              <p className="mt-2 text-xs text-ink-muted">{tx.what}</p>
               {def.params.length ? (
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   {def.params.map((p) => (

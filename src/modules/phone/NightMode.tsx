@@ -3,7 +3,7 @@ import { BeforeAfter } from '../../components/image/BeforeAfter'
 import { ImageCanvas } from '../../components/image/ImageCanvas'
 import { ImagePicker } from '../../components/image/ImagePicker'
 import { HintBox } from '../../components/learn/HintBox'
-import { LevelTabs } from '../../components/learn/LevelTabs'
+import { More } from '../../components/ui/More'
 import { Term } from '../../components/learn/Term'
 import { Card, DemoButton, FinePrint } from '../../components/ui/primitives'
 import { LabeledSlider } from '../../components/ui/LabeledSlider'
@@ -55,65 +55,15 @@ export function NightMode() {
   const modeName = mode === 'mean' ? night.mean : night.median
   const ghosts = p.shake > 0 && !p.align && n > 1
 
-  const controls = {
-    play: <div className="max-w-md"><LabeledSlider label={night.frames} value={n} min={1} max={MAX_FRAMES} onChange={setN} /></div>,
-    change: (
-      <div className="grid max-w-3xl gap-5 sm:grid-cols-2">
-        <LabeledSlider label={night.frames} value={n} min={1} max={MAX_FRAMES} onChange={setN} />
-        <LabeledSlider label={night.sigma} value={sigma} min={1} max={15} onChange={setSigma} />
-        <LabeledSlider label={night.gain} value={gain} min={0.05} max={0.5} step={0.01} onChange={setGain} format={(v) => v.toFixed(2).replace('.', ',')} />
-        <LabeledSlider label={night.shake} value={shake} min={0} max={6} onChange={setShake} />
-        <div>
-          <p className="font-mono text-xs text-ink-muted">{night.combine}</p>
-          <div className="mt-2 flex gap-2" role="group" aria-label={night.combine}>
-            <DemoButton active={mode === 'mean'} aria-pressed={mode === 'mean'} onClick={() => setMode('mean')}>{night.mean}</DemoButton>
-            <DemoButton active={mode === 'median'} aria-pressed={mode === 'median'} onClick={() => setMode('median')}>{night.median}</DemoButton>
-          </div>
-          {mode === 'median' ? <FinePrint>{night.medianNote}</FinePrint> : null}
-        </div>
-        <div>
-          <label className="flex cursor-pointer items-center gap-2 text-sm">
-            <input type="checkbox" checked={align} onChange={(e) => setAlign(e.target.checked)} className="accent-accent" disabled={shake === 0} />
-            {night.align}
-          </label>
-          <FinePrint>{night.alignNote}</FinePrint>
-        </div>
-      </div>
-    ),
-    discover: (
-      <div className="space-y-5">
-        <p className="max-w-3xl text-sm text-ink-muted">
-          Folosește sliderele de la nivelul „Schimbă” și numerele <Term id="mse">MSE</Term> și <Term id="snr">SNR</Term> de mai jos ca să răspunzi provocărilor.
-        </p>
-        <HintBox title="Provocarea: de două ori mai luminos, fără mai mult zgomot" steps={night.hints} />
-        <div className="grid gap-6 md:grid-cols-3">
-          <Card>
-            <h3 className="font-semibold">{night.challengesTitle}</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">{night.challenges.map((c) => <li key={c}>{c}</li>)}</ul>
-          </Card>
-          <Card>
-            <h3 className="font-semibold">{night.aiTitle}</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">{night.ai.map((c) => <li key={c}>{c}</li>)}</ul>
-          </Card>
-          <Card>
-            <h3 className="font-semibold">{night.mistakesTitle}</h3>
-            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">{night.mistakes.map((c) => <li key={c}>{c}</li>)}</ul>
-          </Card>
-        </div>
-      </div>
-    ),
-  }
-
   return (
-    <div>
-      <p className="mb-5 max-w-3xl text-sm leading-relaxed text-ink-muted">{night.how}</p>
+    <div className="space-y-6">
       <ImagePicker onChange={(img) => setSource(img)} />
-      <div className="mt-8">
-        <LevelTabs levels={controls} />
+      <div className="max-w-xl">
+        <LabeledSlider label={night.frames} value={n} min={1} max={MAX_FRAMES} onChange={setN} />
       </div>
 
       {out && clean && curve ? (
-        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div>
             <BeforeAfter before={out.single} after={out.merged} alt={night.alt} />
             <p className="mt-2 text-center font-mono text-xs text-ink-muted">
@@ -124,22 +74,73 @@ export function NightMode() {
                 {night.ghosts}
               </p>
             ) : null}
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              <Thumb img={out.raw} label={night.raw} />
-              <Thumb img={grayToImg(clean.gray, clean.w, clean.h)} label={night.clean} />
-            </div>
           </div>
-          <div className="space-y-5">
+          <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3 font-mono text-sm">
               <Metric title="1 cadru" mse={out.mse1} snr={out.snr1} />
               <Metric title={`${modeName} · N = ${n}`} mse={out.mseN} snr={out.snrN} strong />
             </div>
-            <pre className="rounded-lg bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{night.formulas}</pre>
-            <FinePrint>{night.mseNote}</FinePrint>
             <NoiseChart measured={curve} current={n} />
           </div>
         </div>
       ) : null}
+
+      <More title="Mai multe setări (zgomot, lumină, mână care tremură, mediană)">
+        <div className="space-y-6">
+          <div className="grid max-w-3xl gap-5 sm:grid-cols-2">
+            <LabeledSlider label={night.sigma} value={sigma} min={1} max={15} onChange={setSigma} />
+            <LabeledSlider label={night.gain} value={gain} min={0.05} max={0.5} step={0.01} onChange={setGain} format={(v) => v.toFixed(2).replace('.', ',')} />
+            <LabeledSlider label={night.shake} value={shake} min={0} max={6} onChange={setShake} />
+            <div>
+              <p className="font-mono text-xs text-ink-muted">{night.combine}</p>
+              <div className="mt-2 flex gap-2" role="group" aria-label={night.combine}>
+                <DemoButton active={mode === 'mean'} aria-pressed={mode === 'mean'} onClick={() => setMode('mean')}>{night.mean}</DemoButton>
+                <DemoButton active={mode === 'median'} aria-pressed={mode === 'median'} onClick={() => setMode('median')}>{night.median}</DemoButton>
+              </div>
+              {mode === 'median' ? <FinePrint>{night.medianNote}</FinePrint> : null}
+            </div>
+            <div>
+              <label className="flex cursor-pointer items-center gap-2 text-sm">
+                <input type="checkbox" checked={align} onChange={(e) => setAlign(e.target.checked)} className="accent-accent" disabled={shake === 0} />
+                {night.align}
+              </label>
+              <FinePrint>{night.alignNote}</FinePrint>
+            </div>
+          </div>
+          {out && clean ? (
+            <div className="grid max-w-md grid-cols-2 gap-3">
+              <Thumb img={out.raw} label={night.raw} />
+              <Thumb img={grayToImg(clean.gray, clean.w, clean.h)} label={night.clean} />
+            </div>
+          ) : null}
+          <p className="max-w-3xl text-sm text-ink-muted">{night.how}</p>
+          <pre className="overflow-x-auto rounded-lg bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{night.formulas}</pre>
+          <FinePrint>{night.mseNote}</FinePrint>
+        </div>
+      </More>
+
+      <More title="Provocări și sfaturi">
+        <div className="space-y-5">
+          <p className="max-w-3xl text-sm text-ink-muted">
+            Folosește <Term id="mse">MSE</Term> și <Term id="snr">SNR</Term> de mai sus ca să răspunzi provocărilor.
+          </p>
+          <HintBox title="Provocarea: de două ori mai luminos, fără mai mult zgomot" steps={night.hints} />
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card>
+              <h3 className="font-semibold">{night.challengesTitle}</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">{night.challenges.map((c) => <li key={c}>{c}</li>)}</ul>
+            </Card>
+            <Card>
+              <h3 className="font-semibold">{night.aiTitle}</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">{night.ai.map((c) => <li key={c}>{c}</li>)}</ul>
+            </Card>
+            <Card>
+              <h3 className="font-semibold">{night.mistakesTitle}</h3>
+              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed">{night.mistakes.map((c) => <li key={c}>{c}</li>)}</ul>
+            </Card>
+          </div>
+        </div>
+      </More>
     </div>
   )
 }

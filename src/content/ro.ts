@@ -11,17 +11,15 @@ export const ro = {
     back: 'Înapoi acasă',
   },
   home: {
-    kicker: 'Partea 1 · Imagini',
     title: 'Ce poate face informatica cu o imagine?',
-    lead: 'La școală rezolvi probleme cu răspuns cunoscut. În cercetare, aceleași idei, pixeli, numere și reguli, ajung în telefonul din buzunar și în aparatele din spital. Aici pornești de la un exemplu, schimbi parametrii și vezi ce se întâmplă.',
+    lead: 'Alege un demo, mută un slider și vezi pe loc ce se întâmplă.',
     threadTitle: 'Firul roșu: pragul',
-    threadText:
-      'Aproape peste tot unde calculatorul „decide”, undeva e un prag: un număr care împarte lumea în „da” și „nu”. Îl vei întâlni pe pixeli, pe o mască de portret, pe ochii unui șofer și, în partea a doua, pe o probabilitate dintr-un diagnostic.',
+    threadText: 'Peste tot unde calculatorul „decide” e un prag: un număr care spune „da” sau „nu”.',
     threadLink: 'Vezi recapitularea pragului',
-    modules: 'Module',
+    modules: 'Alege un demo',
     open: 'Deschide',
     soon: 'În curând',
-    levels: 'Fiecare modul are trei niveluri: Joacă, Schimbă, Descoperă.',
+    levels: '',
   },
   levels: {
     play: 'Joacă',

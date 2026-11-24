@@ -6,6 +6,7 @@ import { DEFAULT_THRESHOLDS, defaultRule, updateClosedTime, type State, type Thr
 import { CHEEK_IMAGE_LEFT, CHEEK_IMAGE_RIGHT, EYE_IMAGE_LEFT, EYE_IMAGE_RIGHT, NOSE_TIP, earOf, headTurn, type Pt } from '../../lib/face'
 import { detectFace, loadFaceLandmarker } from '../../lib/faceLandmarker'
 import { simSample } from '../../lib/simSignal'
+import { More } from '../../components/ui/More'
 import { Experiment } from './Experiment'
 import { FaceSketch } from './FaceSketch'
 
@@ -321,7 +322,9 @@ export function LiveDemo({ rule, onRuleError }: { rule: RuleFn; onRuleError: () 
         </div>
       </div>
 
-      <Experiment current={view.state} />
+      <More title={live.experiment.title}>
+        <Experiment current={view.state} />
+      </More>
     </div>
   )
 }

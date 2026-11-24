@@ -22,7 +22,7 @@ export const modules: ModuleDef[] = [
   {
     id: 'filters',
     title: 'Studio de filtre',
-    description: 'Construiește o stivă de filtre, vezi formula fiecăruia și ce se întâmplă cu pixelii și cu histograma.',
+    description: 'Pune filtre peste o poză și vezi formula și pixelii.',
     path: 'filtre',
     status: 'ready',
     part: 1,
@@ -31,7 +31,7 @@ export const modules: ModuleDef[] = [
   {
     id: 'phone',
     title: 'Cum face telefonul poza asta?',
-    description: 'Modul noapte (media mai multor cadre) și portret cu fundal neclar (masca dintr-un prag, apoi dintr-un model).',
+    description: 'Poză de noapte din mai multe cadre și portret cu fundal neclar.',
     path: 'telefon',
     status: 'ready',
     part: 1,
@@ -40,7 +40,7 @@ export const modules: ModuleDef[] = [
   {
     id: 'live',
     title: 'Ești atent la drum?',
-    description: 'Demo live cu camera: din puncte pe față la o decizie „atent / obosit / distras”. Un demo educațional, nu un sistem real.',
+    description: 'Camera urmărește ochii și capul: atent, obosit sau distras?',
     path: 'live',
     status: 'ready',
     part: 1,
@@ -49,7 +49,7 @@ export const modules: ModuleDef[] = [
   {
     id: 'recap',
     title: 'Recapitulare: pragul',
-    description: 'Firul roșu al părții 1: același prag pe pixeli, pe mască, pe ochi și, mai târziu, pe probabilitate. Mută pragul și numără greșelile.',
+    description: 'Același prag peste tot. Mută-l și numără greșelile.',
     path: 'recapitulare',
     status: 'ready',
     part: 1,
@@ -58,7 +58,7 @@ export const modules: ModuleDef[] = [
   {
     id: 'medicine',
     title: 'Partea 2: AI în medicină',
-    description: 'Detecția fracturilor de încheietură la copii. Aceleași idei, acum cu probabilități.',
+    description: 'Fracturi de încheietură la copii: aceleași idei, cu probabilități.',
     path: 'medicina',
     status: 'soon',
     part: 2,

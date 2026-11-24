@@ -3,6 +3,7 @@ import { BeforeAfter } from '../../components/image/BeforeAfter'
 import { ImageCanvas } from '../../components/image/ImageCanvas'
 import { ImagePicker } from '../../components/image/ImagePicker'
 import { HintBox } from '../../components/learn/HintBox'
+import { More } from '../../components/ui/More'
 import { Badge, Card, DemoButton, FinePrint, cx } from '../../components/ui/primitives'
 import { LabeledSlider } from '../../components/ui/LabeledSlider'
 import { portrait as tx } from '../../content/phone'
@@ -115,7 +116,7 @@ export function PortraitMode() {
         </p>
       ) : null}
 
-      <div role="tablist" aria-label={tx.stepsLabel} className="mt-8 mb-6 flex flex-wrap gap-2">
+      <div role="tablist" aria-label={tx.stepsLabel} className="mt-6 mb-6 flex flex-wrap gap-2">
         {tabs.map((name, i) => (
           <button
             key={name}
@@ -266,16 +267,17 @@ export function PortraitMode() {
         ) : null}
       </div>
 
-      <div className="mt-14">
-        <p className="mb-4 font-mono text-xs tracking-wide text-accent-text uppercase">Nivelul 3 · Descoperă</p>
-        <HintBox title="Indicii pentru portret" steps={tx.hints} />
-        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <ListCard title={tx.challengesTitle} items={tx.challenges} />
-          <ListCard title={tx.aiTitle} items={tx.ai} />
-          <ListCard title={tx.mistakesTitle} items={tx.mistakes} />
-          <ListCard title={tx.ethicsTitle} items={tx.ethics} />
+      <More title="Provocări, sfaturi și limitele modelului">
+        <div className="space-y-6">
+          <HintBox title="Indicii pentru portret" steps={tx.hints} />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <ListCard title={tx.challengesTitle} items={tx.challenges} />
+            <ListCard title={tx.aiTitle} items={tx.ai} />
+            <ListCard title={tx.mistakesTitle} items={tx.mistakes} />
+            <ListCard title={tx.ethicsTitle} items={tx.ethics} />
+          </div>
         </div>
-      </div>
+      </More>
     </div>
   )
 }

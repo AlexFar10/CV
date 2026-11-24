@@ -13,7 +13,7 @@ Fir roșu didactic: **pragul**. Apare pe pixeli (filtrul „Prag”), pe mască 
 | `/live` | Ești atent la drum? | Demo cu camera (EAR + rotirea capului), mod simulat, experiment ghidat, regulă de decizie editabilă. Demo educațional, nu un sistem de siguranță |
 | `/recapitulare` | Recapitulare: pragul | Compromisul alarme false / alarme ratate |
 
-Fiecare modul are trei niveluri: **Joacă**, **Schimbă**, **Descoperă**. Nivelul 3 nu conține prompturi gata de copiat, ci indicii în trepte (`HintBox`), provocări, sfaturi pentru lucrul cu un asistent AI și „greșeli frecvente”.
+Fiecare pagină are **un singur ecran principal**: imaginea, 1–3 slidere și rezultatul, vizibile imediat. Tot ce e avansat stă sub „Vrei mai mult?” (blocuri închise, componenta `More`): joc, presete, editor de kernel și de cod, setări în plus, etică. Acolo sunt și indicii în trepte (`HintBox`), provocări, sfaturi pentru lucrul cu un asistent AI și „greșeli frecvente”, fără prompturi gata de copiat.
 
 ## Cum rulezi
 
@@ -37,10 +37,10 @@ src/
   app/            router, layout, registrul de module (modules.ts)
   modules/        o pagină (lazy) pe modul: home, filters, phone, live, recap
   components/
-    ui/           Card, DemoButton, Badge, FinePrint, CodeBlock, LabeledSlider
-    layout/       Section (antet), SideNav (puncte laterale)
+    ui/           Card, DemoButton, Badge, FinePrint, CodeBlock, LabeledSlider, More („Vrei mai mult?”)
+    layout/       Page, PageBlock (titlu + o frază)
     image/        ImagePicker, BeforeAfter, Histogram, PixelInspector, ImageCanvas
-    learn/        LevelTabs, HintBox, Term (glosar), Quiz
+    learn/        HintBox, Term (glosar), Quiz
   lib/            funcții pure (testate): filtre, convoluție, blur, măști, zgomot/MSE/SNR, EAR, PRNG cu seed, scena de test
   content/        textele în română (ro.ts, filters.ts, phone.ts, live.ts, recap.ts, glossary.ts)
   hooks/          useThrottled
@@ -52,7 +52,7 @@ public/
 
 ## Cum adaugi un modul nou (de exemplu din partea 2)
 
-1. Creează `src/modules/<nume>/<Nume>Page.tsx` cu `export default function ...` (poți folosi `Section`, `SideNav`, `ImagePicker`, `BeforeAfter`, `Histogram`, `HintBox`, `LabeledSlider` etc.). Textele merg într-un fișier nou din `src/content/`.
+1. Creează `src/modules/<nume>/<Nume>Page.tsx` cu `export default function ...` (poți folosi `Page`, `More`, `ImagePicker`, `BeforeAfter`, `Histogram`, `HintBox`, `LabeledSlider` etc.). Textele merg într-un fișier nou din `src/content/`.
 2. Adaugă **o singură intrare** în `src/app/modules.ts`:
 
 ```ts
