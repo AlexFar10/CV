@@ -6,21 +6,24 @@ export function cx(...parts: Array<string | false | null | undefined>): string {
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'solid' | 'outline' | 'ghost'
+  /** selectat (aria-pressed) = fundal ink */
   active?: boolean
 }
 
-/** Buton pilulă folosit peste tot în demo-uri. */
+/** Buton dreptunghiular (rază 4 px, înălțime minimă 44 px). */
 export function DemoButton({ variant = 'outline', active = false, className, children, ...rest }: ButtonProps) {
   return (
     <button
       type="button"
       className={cx(
-        'inline-flex cursor-pointer items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50',
-        variant === 'solid' || active
-          ? 'bg-accent text-white shadow-sm hover:opacity-90'
-          : variant === 'ghost'
-            ? 'text-ink-muted hover:bg-paper-subtle hover:text-ink'
-            : 'border border-line bg-paper text-ink hover:border-accent hover:text-accent-text',
+        'inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-[4px] px-5 text-[15px] font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50',
+        active
+          ? 'border border-ink bg-ink text-white'
+          : variant === 'solid'
+            ? 'bg-accent text-white hover:bg-accent-hover'
+            : variant === 'ghost'
+              ? 'text-ink-muted hover:text-accent-hover'
+              : 'border border-line-strong bg-paper text-ink hover:border-accent hover:text-accent-hover',
         className,
       )}
       {...rest}
@@ -31,19 +34,15 @@ export function DemoButton({ variant = 'outline', active = false, className, chi
 }
 
 export function Card({ className, children }: { className?: string; children: ReactNode }) {
-  return (
-    <div className={cx('rounded-2xl border border-line bg-paper p-6 shadow-[0_1px_3px_rgb(15_23_42/0.04)]', className)}>
-      {children}
-    </div>
-  )
+  return <div className={cx('rounded-[6px] border border-line bg-paper p-6', className)}>{children}</div>
 }
 
 export function Badge({ children, tone = 'soft' }: { children: ReactNode; tone?: 'soft' | 'line' }) {
   return (
     <span
       className={cx(
-        'inline-flex items-center gap-1 rounded-full px-3 py-1 font-mono text-xs',
-        tone === 'soft' ? 'bg-accent-soft text-accent-text' : 'border border-line text-ink-muted',
+        'inline-flex items-center gap-1 rounded-[2px] border px-2.5 py-1 font-mono text-xs tracking-[0.06em] uppercase',
+        tone === 'soft' ? 'border-accent text-accent-hover' : 'border-line-strong text-ink-faint',
       )}
     >
       {children}
@@ -53,7 +52,7 @@ export function Badge({ children, tone = 'soft' }: { children: ReactNode; tone?:
 
 /** Notă tehnică mică (de exemplu „simulare simplificată”). */
 export function FinePrint({ children }: { children: ReactNode }) {
-  return <p className="mt-3 font-mono text-xs leading-relaxed text-ink-muted">{children}</p>
+  return <p className="mt-3 font-mono text-xs leading-relaxed text-ink-faint">{children}</p>
 }
 
 export function CodeBlock({ code, className }: { code: string; className?: string }) {
@@ -61,7 +60,7 @@ export function CodeBlock({ code, className }: { code: string; className?: strin
     <pre
       tabIndex={0}
       className={cx(
-        'overflow-x-auto rounded-xl border border-line bg-paper-subtle p-4 font-mono text-[13px] leading-relaxed text-ink',
+        'overflow-x-auto rounded-[6px] border border-line bg-paper-subtle p-4 font-mono text-[13px] leading-relaxed text-ink',
         className,
       )}
     >

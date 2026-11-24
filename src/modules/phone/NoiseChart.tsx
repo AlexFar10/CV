@@ -29,7 +29,7 @@ export function NoiseChart({ measured, current }: Props) {
           <span className="text-accent-text">━ {night.measured}</span> · <span>┅ {night.theory}</span>
         </span>
       </figcaption>
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-lg border border-line bg-paper" role="img" aria-label={night.chartDesc}>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-[4px] border border-line bg-paper" role="img" aria-label={night.chartDesc}>
         <line x1={M.l} y1={H - M.b} x2={W - M.r} y2={H - M.b} stroke="#94a3b8" />
         <line x1={M.l} y1={M.t} x2={M.l} y2={H - M.b} stroke="#94a3b8" />
         {ticks.map((t) => (
@@ -52,10 +52,10 @@ export function NoiseChart({ measured, current }: Props) {
           {night.chartY}
         </text>
         <path d={path((k) => e1 / Math.sqrt(k))} fill="none" stroke="#64748b" strokeWidth="1.5" strokeDasharray="4 4" />
-        <path d={path((k) => measured[k - 1])} fill="none" stroke="#4f46e5" strokeWidth="2" />
-        <line x1={x(cur)} y1={M.t} x2={x(cur)} y2={H - M.b} stroke="#4f46e5" strokeOpacity="0.35" />
-        <circle cx={x(cur)} cy={y(measured[cur - 1])} r="4.5" fill="#4f46e5" stroke="#fff" strokeWidth="2" />
-        <text x={Math.min(x(cur) + 8, W - 40)} y={M.t + 12} fontSize="11" fill="#4338ca" fontFamily="var(--font-mono)">
+        <path d={path((k) => measured[k - 1])} fill="none" stroke="#2f5bd0" strokeWidth="2" />
+        <line x1={x(cur)} y1={M.t} x2={x(cur)} y2={H - M.b} stroke="#2f5bd0" strokeOpacity="0.35" />
+        <circle cx={x(cur)} cy={y(measured[cur - 1])} r="4.5" fill="#2f5bd0" stroke="#fff" strokeWidth="2" />
+        <text x={Math.min(x(cur) + 8, W - 40)} y={M.t + 12} fontSize="11" fill="#a82310" fontFamily="var(--font-mono)">
           {night.now} N={cur}
         </text>
       </svg>

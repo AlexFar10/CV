@@ -27,7 +27,7 @@ export function Histogram({ before, after }: Props) {
       }
     }
     draw(before, 'rgba(100,116,139,0.55)')
-    if (after) draw(after, 'rgba(79,70,229,0.65)')
+    if (after) draw(after, 'rgba(47,91,208,0.65)')
   }, [before, after])
 
   return (
@@ -43,7 +43,7 @@ export function Histogram({ before, after }: Props) {
         ref={ref}
         width={W}
         height={H}
-        className="w-full rounded-lg border border-line bg-paper"
+        className="w-full rounded-[4px] border border-line bg-paper"
         role="img"
         aria-label="Histograma luminanței: câți pixeli au fiecare nivel de la 0 la 255"
       />

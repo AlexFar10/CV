@@ -189,7 +189,7 @@ export function ImagePicker({ onChange, sources = ['scene', 'camera', 'chelsea',
 
       {camOn ? (
         <div className="mt-4 max-w-sm">
-          <video ref={videoRef} muted playsInline className="w-full rounded-xl border border-line bg-black" aria-label="Previzualizare cameră" />
+          <video ref={videoRef} muted playsInline className="w-full rounded-[6px] border border-line bg-black" aria-label="Previzualizare cameră" />
           <div className="mt-2 flex gap-2">
             <DemoButton variant="solid" onClick={snap}>
               {t.picker.snap}

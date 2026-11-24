@@ -272,7 +272,7 @@ export function LiveDemo({ rule, onRuleError }: { rule: RuleFn; onRuleError: () 
 
           {/* video-ul rămâne montat ca să putem lega fluxul; se vede doar cu camera pornită */}
           <div className={cx('relative mx-auto mt-3 w-full max-w-[480px]', phase === 'camera' ? '' : 'hidden')}>
-            <video ref={videoRef} muted playsInline aria-label={live.videoAlt} className="w-full -scale-x-100 rounded-xl border border-line bg-black" />
+            <video ref={videoRef} muted playsInline aria-label={live.videoAlt} className="w-full -scale-x-100 rounded-[6px] border border-line bg-black" />
             <canvas ref={overlayRef} aria-hidden className="pointer-events-none absolute inset-0 h-full w-full -scale-x-100" />
           </div>
           {phase === 'sim' ? (
@@ -290,7 +290,7 @@ export function LiveDemo({ rule, onRuleError }: { rule: RuleFn; onRuleError: () 
 
         {/* dreapta: stare, valori, grafic, slidere */}
         <div className="space-y-5">
-          <div className={cx('rounded-2xl border-2 p-5', STATE_STYLE[view.state])}>
+          <div className={cx('rounded-[6px] border-2 p-5', STATE_STYLE[view.state])}>
             <p className="font-mono text-xs tracking-wide uppercase opacity-80">{live.stateLabel}</p>
             <p aria-live="polite" aria-atomic="true" className="mt-1 text-4xl font-bold tracking-tight">
               <span aria-hidden>{STATE_ICON[view.state]} </span>
@@ -307,7 +307,7 @@ export function LiveDemo({ rule, onRuleError }: { rule: RuleFn; onRuleError: () 
 
           <figure>
             <figcaption className="mb-1 font-mono text-xs text-ink-muted">{live.graphTitle}</figcaption>
-            <canvas ref={graphRef} width={GRAPH_W} height={GRAPH_H} role="img" aria-label={live.graphAlt} className="w-full rounded-lg border border-line bg-paper" />
+            <canvas ref={graphRef} width={GRAPH_W} height={GRAPH_H} role="img" aria-label={live.graphAlt} className="w-full rounded-[4px] border border-line bg-paper" />
           </figure>
 
           <div className="space-y-4">
@@ -337,11 +337,11 @@ function fmt(v: number, d: number): string {
 
 function Meter({ label, value, pct }: { label: string; value: string; pct: number }) {
   return (
-    <div className="rounded-xl border border-line p-3">
+    <div className="rounded-[6px] border border-line p-3">
       <p className="font-sans text-[11px] leading-tight text-ink-muted">{label}</p>
       <p className="mt-1 tabular-nums">{value}</p>
-      <div className="mt-2 h-1.5 rounded-full bg-line" aria-hidden>
-        <div className="h-full rounded-full bg-accent" style={{ width: `${pct}%` }} />
+      <div className="mt-2 h-1.5 rounded-[4px] bg-line" aria-hidden>
+        <div className="h-full rounded-[4px] bg-accent" style={{ width: `${pct}%` }} />
       </div>
     </div>
   )
@@ -366,7 +366,7 @@ function drawGraph(c: HTMLCanvasElement | null, buf: { t: number; ear: number }[
   ctx.fillStyle = '#b91c1c'
   ctx.font = '11px ui-monospace, monospace'
   ctx.fillText(`${live.threshold} ${thr.toFixed(2).replace('.', ',')}`, 6, y(thr) - 4)
-  ctx.strokeStyle = '#4f46e5'
+  ctx.strokeStyle = '#2f5bd0'
   ctx.lineWidth = 2
   ctx.beginPath()
   let pen = false

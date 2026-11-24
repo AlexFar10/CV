@@ -129,7 +129,7 @@ export function PortraitMode() {
             onClick={() => setStep(i)}
             onKeyDown={(e) => onTabKey(e, i)}
             className={cx(
-              'cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors',
+              'cursor-pointer rounded-[4px] border px-4 py-2 text-sm font-medium transition-colors',
               step === i ? 'border-accent bg-accent text-white' : 'border-line hover:border-accent',
             )}
           >
@@ -148,7 +148,7 @@ export function PortraitMode() {
                   onClick={onClickImage}
                   role="img"
                   aria-label={tx.s1.altOverlay}
-                  className={cx('mx-auto max-h-[520px] w-auto max-w-full rounded-xl border border-line', method === 'click' && 'cursor-crosshair')}
+                  className={cx('mx-auto max-h-[520px] w-auto max-w-full rounded-[6px] border border-line', method === 'click' && 'cursor-crosshair')}
                 />
                 <p className="mt-2 text-center font-mono text-xs text-ink-muted">{tx.s1.overlay}</p>
               </div>
@@ -179,7 +179,7 @@ export function PortraitMode() {
                   {tx.s1.invert}
                 </label>
                 <div>
-                  <ImageCanvas img={maskToImg(hand)} role="img" aria-label={tx.s1.mask} className="max-h-48 w-auto rounded-lg border border-line" />
+                  <ImageCanvas img={maskToImg(hand)} role="img" aria-label={tx.s1.mask} className="max-h-48 w-auto rounded-[4px] border border-line" />
                   <p className="mt-1 font-mono text-xs text-ink-muted">
                     {tx.s1.mask} · {tx.s1.covered(pct(coverage(hand)))}
                   </p>
@@ -200,7 +200,7 @@ export function PortraitMode() {
                 </div>
                 <div className="space-y-4">
                   <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed">{tx.s2.limits.map((l) => <li key={l}>{l}</li>)}</ul>
-                  <p className="rounded-xl border border-line bg-paper-subtle p-3 text-sm">{tx.s2.try}</p>
+                  <p className="rounded-[6px] border border-line bg-paper-subtle p-3 text-sm">{tx.s2.try}</p>
                   <p className="text-sm font-medium">{tx.s2.verdict}</p>
                 </div>
               </div>
@@ -216,16 +216,16 @@ export function PortraitMode() {
                 <span className="text-xs text-ink-muted">{tx.s3.note}</span>
               </div>
               {model.status === 'error' ? (
-                <p role="alert" className="mt-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">{model.message}</p>
+                <p role="alert" className="mt-3 rounded-[6px] border border-red-200 bg-red-50 p-3 text-sm text-red-800">{model.message}</p>
               ) : null}
               {prob && modelBin ? (
                 <div className="mt-6 grid gap-6 lg:grid-cols-2">
                   <figure>
-                    <ImageCanvas img={maskToImg(prob)} role="img" aria-label={tx.s3.altProb} className="mx-auto max-h-[480px] w-auto max-w-full rounded-xl border border-line" />
+                    <ImageCanvas img={maskToImg(prob)} role="img" aria-label={tx.s3.altProb} className="mx-auto max-h-[480px] w-auto max-w-full rounded-[6px] border border-line" />
                     <figcaption className="mt-1 text-center font-mono text-xs text-ink-muted">{tx.s3.prob}</figcaption>
                   </figure>
                   <figure>
-                    <ImageCanvas img={overlayMask(src, modelBin)} role="img" aria-label={tx.s3.altOverlay} className="mx-auto max-h-[480px] w-auto max-w-full rounded-xl border border-line" />
+                    <ImageCanvas img={overlayMask(src, modelBin)} role="img" aria-label={tx.s3.altOverlay} className="mx-auto max-h-[480px] w-auto max-w-full rounded-[6px] border border-line" />
                     <figcaption className="mt-1 text-center font-mono text-xs text-ink-muted">{tx.s3.result}</figcaption>
                   </figure>
                   <div className="space-y-3 lg:col-span-2">
@@ -243,7 +243,7 @@ export function PortraitMode() {
             <div>
               <h3 className="text-xl font-bold tracking-tight">{tx.s4.title}</h3>
               <p className="mt-2 text-sm text-ink-muted">{tx.s4.intro}</p>
-              <pre className="mt-3 overflow-x-auto rounded-lg bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{tx.s4.formula}</pre>
+              <pre className="mt-3 overflow-x-auto rounded-[4px] bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{tx.s4.formula}</pre>
               {out4 ? (
                 <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_300px]">
                   <BeforeAfter before={src} after={out4} alt={tx.s4.alt} />

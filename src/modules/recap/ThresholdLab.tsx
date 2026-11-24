@@ -1,75 +1,83 @@
 import { useMemo, useState } from 'react'
-import { DemoButton, FinePrint } from '../../components/ui/primitives'
 import { LabeledSlider } from '../../components/ui/LabeledSlider'
+import { Stage } from '../../components/ui/Stage'
 import { recap } from '../../content/recap'
-import { bestThreshold, confusion, histogram, makeScores } from '../../lib/threshold'
+import { confusion, histogram, makeScores } from '../../lib/threshold'
 
+const W = 640
+const H = 300
+const L = 12
+const R = 12
+const T = 40
+const B = 36
 const BINS = 20
-const W = 520
-const H = 200
-const M = { l: 8, r: 8, t: 10, b: 28 }
 
+/** Compromisul pragului: histograme suprapuse, un slider, două numere mari (alarme false, alarme ratate). */
 export function ThresholdLab() {
   const r = recap.lab
   const scores = useMemo(() => makeScores(), [])
   const [thr, setThr] = useState(0.5)
-  const [cost, setCost] = useState(1)
   const c = confusion(scores, thr)
   const hn = useMemo(() => histogram(scores.neg, BINS), [scores])
   const hp = useMemo(() => histogram(scores.pos, BINS), [scores])
   const max = Math.max(...hn, ...hp)
-  const bw = (W - M.l - M.r) / BINS
-  const x = (v: number) => M.l + v * (W - M.l - M.r)
-  const bar = (v: number) => (v / max) * (H - M.t - M.b)
+  const bw = (W - L - R) / BINS
+  const bar = (v: number) => (v / max) * (H - T - B)
+  const x = L + thr * (W - L - R)
+  const tx = thr.toFixed(2).replace('.', ',')
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
-      <figure>
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full rounded-xl border border-line bg-paper" role="img" aria-label={r.chartAlt}>
+    <div>
+      <Stage as="figure">
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={r.chartAlt} className="block">
           {hn.map((v, i) => (
-            <rect key={`n${i}`} x={M.l + i * bw + 1} y={H - M.b - bar(v)} width={bw - 2} height={bar(v)} fill="#94a3b8" fillOpacity="0.7" />
+            <rect key={`n${i}`} x={L + i * bw + 1} y={H - B - bar(v)} width={bw - 2} height={bar(v)} fill="#8c8e95" fillOpacity="0.75" />
           ))}
           {hp.map((v, i) => (
-            <rect key={`p${i}`} x={M.l + i * bw + 1} y={H - M.b - bar(v)} width={bw - 2} height={bar(v)} fill="#4f46e5" fillOpacity="0.55" />
+            <rect key={`p${i}`} x={L + i * bw + 1} y={H - B - bar(v)} width={bw - 2} height={bar(v)} fill="#7fa6ff" fillOpacity="0.7" />
           ))}
-          <line x1={M.l} y1={H - M.b} x2={W - M.r} y2={H - M.b} stroke="#94a3b8" />
-          <line x1={x(thr)} y1={M.t} x2={x(thr)} y2={H - M.b} stroke="#dc2626" strokeWidth="2" strokeDasharray="5 4" />
-          <text x={Math.min(W - 70, x(thr) + 6)} y={M.t + 10} fontSize="11" fill="#b91c1c" fontFamily="var(--font-mono)">
-            prag {thr.toFixed(2).replace('.', ',')}
+          <path d={`M${L} ${H - B}H${W - R}`} stroke="#e8e8e4" strokeWidth="1.5" />
+          <path d={`M${x} 14V${H - B}`} stroke="#ff5a3c" strokeWidth="3" />
+          <text x={thr > 0.8 ? x - 8 : x + 8} y="30" textAnchor={thr > 0.8 ? 'end' : 'start'} fill="#ff5a3c" fontFamily="var(--font-mono)" fontSize="14" fontWeight="500">
+            prag {tx}
           </text>
-          {[0, 0.5, 1].map((t) => (
-            <text key={t} x={x(t)} y={H - 12} textAnchor={t === 0 ? 'start' : t === 1 ? 'end' : 'middle'} fontSize="11" fill="#475569" fontFamily="var(--font-mono)">
-              {String(t).replace('.', ',')}
-            </text>
-          ))}
-          <text x={W / 2} y={H - 1} textAnchor="middle" fontSize="10" fill="#475569" fontFamily="var(--font-mono)">
-            {r.scoreAxis}
-          </text>
+          <text x={L} y={H - 16} fill="#a3a5ab" fontFamily="var(--font-mono)" fontSize="12">0</text>
+          <text x={W / 2} y={H - 16} textAnchor="middle" fill="#a3a5ab" fontFamily="var(--font-mono)" fontSize="12">0,5</text>
+          <text x={W - R} y={H - 16} textAnchor="end" fill="#a3a5ab" fontFamily="var(--font-mono)" fontSize="12">1</text>
         </svg>
-        <figcaption className="mt-2 flex flex-wrap gap-x-4 font-mono text-xs text-ink-muted">
-          <span>■ {r.legendNeg}</span>
-          <span className="text-accent-text">■ {r.legendPos}</span>
+        <figcaption className="flex flex-wrap justify-between gap-x-6 gap-y-2 border-t border-stage-line px-5 pt-3 pb-4 font-mono text-xs text-stage-muted">
+          <span className="inline-flex items-center gap-2">
+            <i className="inline-block size-2.5 bg-data-neutral" />
+            {r.legendNeg}
+          </span>
+          <span className="inline-flex items-center gap-2 text-data-dark">
+            <i className="inline-block size-2.5 bg-data-dark" />
+            {r.legendPos}
+          </span>
+          <span>{r.scoreAxis}</span>
         </figcaption>
-      </figure>
+      </Stage>
 
-      <div className="space-y-4">
-        <LabeledSlider label={r.thr} value={thr} min={0} max={1} step={0.01} onChange={setThr} format={(v) => v.toFixed(2).replace('.', ',')} />
-        <div className="flex flex-wrap gap-2">
-          <DemoButton onClick={() => setThr(0.25)}>{r.presets.sensitive}</DemoButton>
-          <DemoButton onClick={() => setThr(0.5)}>{r.presets.balanced}</DemoButton>
-          <DemoButton onClick={() => setThr(0.8)}>{r.presets.strict}</DemoButton>
+      <div className="mt-4 flex flex-wrap items-stretch gap-4">
+        <div className="min-w-0 flex-[2_1_320px] rounded-[6px] border border-line bg-paper px-5 py-2">
+          <LabeledSlider label={r.thr} value={thr} min={0} max={1} step={0.01} threshold format={(v) => v.toFixed(2).replace('.', ',')} onChange={setThr} />
         </div>
-        <div role="status" className="rounded-xl border border-line bg-paper-subtle p-4 font-mono text-sm leading-relaxed">
-          <p>{r.falseAlarms(c.fp, scores.neg.length)}</p>
-          <p>{r.missed(c.fn, scores.pos.length)}</p>
-          <p className="mt-1 text-xs text-ink-muted">{r.totalCost(c.fp + cost * c.fn)}</p>
+        <div role="status" className="flex-[1_1_180px] rounded-[6px] border border-line bg-paper px-5 py-3.5">
+          <p className="mb-1.5 font-mono text-[11px] text-ink-faint">Alarme false</p>
+          <p className="font-display text-[40px] leading-none font-bold tracking-[-0.02em]">
+            {c.fp}
+            <span className="font-mono text-[13px] font-normal text-ink-faint"> din {scores.neg.length}</span>
+          </p>
         </div>
-        <LabeledSlider label={r.cost} value={cost} min={1} max={20} onChange={setCost} format={r.costFmt} />
-        <DemoButton variant="solid" onClick={() => setThr(bestThreshold(scores, cost))}>
-          {r.best}
-        </DemoButton>
-        <FinePrint>{r.insight}</FinePrint>
+        <div role="status" className="flex-[1_1_180px] rounded-[6px] border border-line bg-paper px-5 py-3.5">
+          <p className="mb-1.5 font-mono text-[11px] text-ink-faint">Alarme ratate</p>
+          <p className="font-display text-[40px] leading-none font-bold tracking-[-0.02em] text-data">
+            {c.fn}
+            <span className="font-mono text-[13px] font-normal text-ink-faint"> din {scores.pos.length}</span>
+          </p>
+        </div>
       </div>
+      <p className="mt-4 max-w-[40em] text-[15px] leading-normal text-ink-muted">{r.closing}</p>
     </div>
   )
 }

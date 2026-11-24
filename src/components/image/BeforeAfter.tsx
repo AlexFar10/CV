@@ -29,7 +29,7 @@ export function BeforeAfter({ before, after, alt, onProbe }: Props) {
     <div>
       <div
         ref={box}
-        className="relative mx-auto w-full max-w-[640px] overflow-hidden rounded-xl border border-line bg-paper-subtle select-none"
+        className="relative mx-auto w-full max-w-[640px] overflow-hidden rounded-[6px] border border-line bg-paper-subtle select-none"
         style={{ aspectRatio: `${after.width} / ${after.height}` }}
         onPointerMove={onMove}
         onPointerLeave={() => onProbe?.(null)}
@@ -43,10 +43,10 @@ export function BeforeAfter({ before, after, alt, onProbe }: Props) {
           style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
         />
         <div aria-hidden className="pointer-events-none absolute inset-y-0 w-0.5 bg-white shadow" style={{ left: `${pos}%` }} />
-        <span className="pointer-events-none absolute top-2 left-2 rounded-full bg-black/60 px-2 py-0.5 font-mono text-xs text-white">
+        <span className="pointer-events-none absolute top-2 left-2 rounded-[4px] bg-black/60 px-2 py-0.5 font-mono text-xs text-white">
           {t.beforeAfter.before}
         </span>
-        <span className="pointer-events-none absolute top-2 right-2 rounded-full bg-black/60 px-2 py-0.5 font-mono text-xs text-white">
+        <span className="pointer-events-none absolute top-2 right-2 rounded-[4px] bg-black/60 px-2 py-0.5 font-mono text-xs text-white">
           {t.beforeAfter.after}
         </span>
       </div>

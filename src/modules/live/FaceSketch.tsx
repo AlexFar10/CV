@@ -6,7 +6,7 @@ export function FaceSketch({ ear, turn }: { ear: number; turn: number }) {
   const shift = Math.max(-1, Math.min(1, turn)) * 38
   const squeeze = 1 - Math.min(0.4, Math.abs(turn) * 0.4)
   return (
-    <svg viewBox="0 0 240 240" className="mx-auto w-full max-w-[320px] rounded-xl border border-line bg-paper-subtle" role="img" aria-label={live.faceAlt}>
+    <svg viewBox="0 0 240 240" className="mx-auto w-full max-w-[320px] rounded-[6px] border border-line bg-paper-subtle" role="img" aria-label={live.faceAlt}>
       <ellipse cx="120" cy="125" rx={78 * squeeze} ry="98" fill="#f3d9c4" stroke="#cbb29c" strokeWidth="2" />
       <g transform={`translate(${shift} 0)`}>
         {[-32, 32].map((dx) => (

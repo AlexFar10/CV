@@ -46,21 +46,21 @@ export function StackEditor({ stack, onChange }: Props) {
             key={f.id}
             type="button"
             onClick={() => add(f.id)}
-            className="cursor-pointer rounded-full border border-line px-3 py-1 text-xs hover:border-accent hover:text-accent-text"
+            className="cursor-pointer rounded-[4px] border border-line px-3 py-1 text-xs hover:border-accent hover:text-accent-text"
           >
             + {filterText[f.id].name}
           </button>
         ))}
       </div>
 
-      {stack.length === 0 ? <p className="mt-5 rounded-xl border border-dashed border-line p-4 text-sm text-ink-muted">{studioText.empty}</p> : null}
+      {stack.length === 0 ? <p className="mt-5 rounded-[6px] border border-dashed border-line p-4 text-sm text-ink-muted">{studioText.empty}</p> : null}
 
       <ol className="mt-5 space-y-3">
         {stack.map((it, i) => {
           const def = FILTER_BY_ID[it.id]
           const tx = filterText[it.id]
           return (
-            <li key={it.uid} className={cx('rounded-2xl border border-line bg-paper p-4', !it.enabled && 'opacity-60')}>
+            <li key={it.uid} className={cx('rounded-[6px] border border-line bg-paper p-4', !it.enabled && 'opacity-60')}>
               <div className="flex flex-wrap items-center gap-2">
                 <span className="font-mono text-xs text-ink-muted">{i + 1}.</span>
                 <h3 className="text-base font-semibold">{tx.name}</h3>
@@ -87,7 +87,7 @@ export function StackEditor({ stack, onChange }: Props) {
                   </IconBtn>
                 </div>
               </div>
-              <pre className="mt-2 overflow-x-auto rounded-lg bg-paper-subtle px-3 py-2 font-mono text-[12px] leading-relaxed whitespace-pre-wrap">{tx.formula}</pre>
+              <pre className="mt-2 overflow-x-auto rounded-[4px] bg-paper-subtle px-3 py-2 font-mono text-[12px] leading-relaxed whitespace-pre-wrap">{tx.formula}</pre>
               {def.params.length ? (
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   {def.params.map((p) => (
@@ -118,7 +118,7 @@ function IconBtn({ label, children, ...rest }: { label: string; children: React.
       type="button"
       aria-label={label}
       title={label}
-      className="grid h-8 w-8 cursor-pointer place-items-center rounded-full border border-line text-ink-muted hover:border-accent hover:text-accent-text disabled:cursor-not-allowed disabled:opacity-40"
+      className="grid h-8 w-8 cursor-pointer place-items-center rounded-[4px] border border-line text-ink-muted hover:border-accent hover:text-accent-text disabled:cursor-not-allowed disabled:opacity-40"
       {...rest}
     >
       {children}

@@ -8,15 +8,15 @@ import { ChevronDown } from 'lucide-react'
 export function More({ title, children }: { title: string; children: ReactNode }) {
   const [opened, setOpened] = useState(false)
   return (
-    <details onToggle={(e) => (e.currentTarget as HTMLDetailsElement).open && setOpened(true)} className="group rounded-2xl border border-line bg-paper">
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 font-semibold [&::-webkit-details-marker]:hidden">
-        <span>
-          <span className="mr-2 font-mono text-xs font-normal text-accent-text">Vrei mai mult?</span>
-          {title}
+    <details onToggle={(e) => (e.currentTarget as HTMLDetailsElement).open && setOpened(true)} className="group rounded-[6px] border border-line bg-paper">
+      <summary className="flex min-h-[68px] cursor-pointer list-none items-center justify-between gap-4 px-6 [&::-webkit-details-marker]:hidden">
+        <span className="flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
+          <span className="font-mono text-xs text-accent-hover">Vrei mai mult?</span>
+          <span className="font-display text-xl font-bold tracking-[-0.01em]">{title}</span>
         </span>
-        <ChevronDown size={18} aria-hidden className="shrink-0 text-ink-muted transition-transform group-open:rotate-180" />
+        <ChevronDown size={20} aria-hidden className="shrink-0 transition-transform group-open:rotate-180" />
       </summary>
-      <div className="border-t border-line p-5">{opened ? children : null}</div>
+      <div className="border-t border-line p-6">{opened ? children : null}</div>
     </details>
   )
 }

@@ -138,3 +138,50 @@ export const live = {
     ],
   },
 }
+
+/** Pagina simplă „Ești atent la drum?” (simulare, un slider). */
+export const liveSimple = {
+  kicker: '03 · Demo live',
+  title: 'Ești atent la drum?',
+  lead: 'Camera urmărește ochii. Dacă stau închiși prea mult, apare alarma.',
+  disclaimer: 'Demo educațional, nu un sistem real de siguranță. Nu-l folosi niciodată la volan.',
+  idea: {
+    title: 'Ideea',
+    items: [
+      '**EAR** e un număr care arată cât de deschiși sunt ochii: mare = deschiși, mic = închiși.',
+      'Sub un **prag**, ochii sunt „închiși”. Dacă rămân așa mai mult de o secundă: „Obosit”.',
+      'Un clipit durează cam 0,2 secunde, deci nu dă alarmă.',
+    ],
+  },
+  try: {
+    title: 'Încearcă',
+    faceAlt: 'Față schematică, cu ochii deschiși sau închiși după rezultat',
+    sim: 'SIMULARE',
+    result: 'Rezultat pe cele 10 secunde',
+    camera: 'Folosește camera',
+    consent: 'Camera pornește doar dacă apeși butonul, pe pagina avansată. Video-ul se procesează local, nu se salvează și nu se trimite nicăieri.',
+    graph: 'EAR în ultimele 10 secunde',
+    graphAlt: 'Grafic cu valoarea EAR în ultimele 10 secunde și linia pragului',
+    from: 'acum 10 s',
+    to: 'acum',
+    slider: 'pragul EAR (sub el: ochi închiși)',
+    longest: (s: string) => `Cea mai lungă închidere: ${s}.`,
+    msgFalse: 'Pragul e prea mare: și ochii deschiși par închiși (alarmă falsă).',
+    msgOk: 'Merge: clipirile sunt ignorate, iar închiderea lungă e prinsă.',
+    msgMissedNone: 'Pragul e prea mic: nimic nu coboară sub el, deci închiderea lungă de la secunda 3 nu e prinsă (alarmă ratată).',
+    msgMissed: 'Pragul e prea mic pentru închiderea lungă de la secunda 3: nu e prinsă (alarmă ratată).',
+    states: { Atent: 'Atent', Obosit: 'Obosit', falsa: 'Alarmă falsă' },
+  },
+  check: {
+    title: 'Verifică-te',
+    question: 'Un clipit durează ~0,2 secunde. De ce nu declanșează alarma „Obosit”?',
+    options: ['Pentru că ochii trebuie să stea închiși mai mult de o secundă.', 'Pentru că EAR nu scade deloc la un clipit.', 'Pentru că detectorul ignoră ochii.'],
+    correct: 0,
+    explanation: 'La un clipit EAR scade sub prag, dar doar vreo 0,2 s. Regula cere mai mult de o secundă.',
+  },
+  more: {
+    title: 'Rotirea capului, regulă proprie, etică și limite',
+    text: 'Pentru cei curioși: detectorul poate să urmărească și capul („Distras”), poți scrie singur regula de decizie și poți discuta ce date ar colecta un sistem real. Stau pe o pagină separată.',
+    link: 'Deschide pagina avansată',
+  },
+}

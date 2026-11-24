@@ -113,3 +113,13 @@ export function imgToCanvas(img: Img): HTMLCanvasElement {
   c.getContext('2d')?.putImageData(toImageData(img), 0, 0)
   return c
 }
+
+/** Încarcă o imagine din `public/` (sau de la un URL) ca Img, redusă la max 640 px. */
+export function loadImg(url: string): Promise<Img> {
+  return new Promise((resolve, reject) => {
+    const im = new Image()
+    im.onload = () => resolve(imgFromSource(im, im.naturalWidth, im.naturalHeight))
+    im.onerror = () => reject(new Error(`Nu am putut încărca ${url}`))
+    im.src = url
+  })
+}

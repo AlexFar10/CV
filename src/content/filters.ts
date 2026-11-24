@@ -164,3 +164,40 @@ export const level3 = {
     'A aplica blur de două ori nu e același lucru cu un blur de rază dublă.',
   ],
 }
+
+/** Pagina simplă „Filtre pe o poză”. */
+export const simple = {
+  kicker: '01 · Partea 1',
+  title: 'Filtre pe o poză',
+  lead: 'Alege un filtru, mută sliderul și compară cu originalul.',
+  idea: {
+    title: 'Ideea',
+    items: [
+      'Un filtru e o formulă aplicată pe <b>fiecare pixel</b>, pe rând.',
+      'Un pixel are trei numere între 0 și 255: roșu, verde, albastru.',
+      'Dacă rezultatul iese din 0–255, se taie la capete.',
+    ],
+  },
+  try: { title: 'Încearcă', pick: 'Alege un filtru', formula: 'Formula', original: 'Original', result: 'Rezultat', noSlider: 'Acest filtru nu are slider: face același lucru peste tot.' },
+  thread: { head: 'Firul roșu: pragul.', text: 'Orice pixel mai luminos decât p devine alb, restul negru.' },
+  check: {
+    title: 'Verifică-te',
+    question: 'Ce valoare are un pixel de 200 după filtrul Negativ?',
+    options: ['55', '200', '255'],
+    correct: 0,
+    explanation: '255 − 200 = 55. Negrul devine alb și invers.',
+  },
+  more: {
+    title: 'Mai multe filtre una peste alta, kernel și cod',
+    text: 'Pentru cei curioși: pune 12 filtre în stivă, scrie-ți propriul kernel 3×3 sau propriul cod. Stă pe o pagină separată, ca să nu încarce ecranul de aici.',
+    link: 'Deschide pagina avansată',
+  },
+  /** filtrele din pagina simplă, în ordine, cu valori de pornire cu efect vizibil */
+  modes: [
+    { id: 'brightness', key: 'b', start: 40 },
+    { id: 'contrast', key: 'c', start: 1.6 },
+    { id: 'negative', key: '', start: 0 },
+    { id: 'blur', key: 'r', start: 4 },
+    { id: 'threshold', key: 'p', start: 110 },
+  ] as const,
+}

@@ -1,18 +1,59 @@
 @import 'tailwindcss';
 
+@theme existent
+ * (păstrează @import 'tailwindcss' la început).
+ *
+ * Nume păstrate unde se poate (paper, ink, line, accent), ca să nu se strice clasele existente.
+ * Instalare fonturi:
+ *   npm i @fontsource-variable/bricolage-grotesque
+ *   (Geist și JetBrains Mono sunt deja instalate)
+ * În src/main.tsx: import '@fontsource-variable/bricolage-grotesque'
+ */
+
 @theme {
+  /* tipografie */
+  --font-display: 'Bricolage Grotesque Variable', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', monospace;
 
-  --color-paper: #ffffff;
-  --color-paper-subtle: #fafafa;
-  --color-ink: #0f172a;
-  --color-ink-muted: #475569;
-  --color-line: #e2e8f0;
+  /* suprafețe (gri cald, saturație < 0,02) */
+  --color-ground: #f1f0ec;        /* fundalul paginii */
+  --color-paper: #fafaf8;         /* carduri, panouri de control */
+  --color-paper-subtle: #eeede8;  /* fundal pentru formule / cod */
+  --color-band: #e7e6e0;          /* benzi de secțiune (firul roșu) */
 
-  --color-accent: #4f46e5;
-  --color-accent-soft: #eef2ff;
-  --color-accent-text: #4338ca;
+  /* text */
+  --color-ink: #121316;
+  --color-ink-muted: #3f4147;     /* text de corp secundar, 9:1 pe ground */
+  --color-ink-faint: #55575c;     /* etichete mici mono, 6:1 pe ground */
+
+  /* linii */
+  --color-line: #d4d3cc;
+  --color-line-strong: #cfcec7;   /* margini de butoane / slidere */
+
+  /* accent = „firul roșu”: DOAR pragul, butoanele principale, numerotarea pașilor */
+  --color-accent: #c22a12;        /* fundal buton (text alb: 6,5:1) */
+  --color-accent-hover: #a82310;  /* hover; și text roșu pe fundal deschis */
+  --color-thread: #ff5a3c;        /* roșul pe fundal închis (linia pragului pe panouri) */
+
+  /* date (a doua culoare, doar în grafice și răspunsuri corecte) */
+  --color-data: #2f5bd0;          /* pe fundal deschis */
+  --color-data-soft: #e8eefc;     /* fundal răspuns corect */
+  --color-data-dark: #7fa6ff;     /* pe panou închis */
+  --color-data-neutral: #8c8e95;  /* seria „fără problemă” / „înainte” */
+
+  /* panoul închis („masa de lumină”): imagini, grafice, camera */
+  --color-stage: #101114;
+  --color-stage-line: #26282d;
+  --color-stage-text: #e8e8e4;
+  --color-stage-muted: #a3a5ab;
+
+  /* alias-uri pentru clasele vechi din paginile avansate */
+  --color-accent-soft: #e7e6e0;
+  --color-accent-text: #a82310;
+
+  --radius-ctl: 4px;   /* butoane, chip-uri, inputuri */
+  --radius-panel: 6px; /* panouri, carduri, imagini */
 
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -24,50 +65,38 @@ html { scroll-behavior: smooth; }
 }
 
 body {
-  background: var(--color-paper);
+  background: var(--color-ground);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+/* SCOATE grila din fundal (body::before din vechiul index.css): nu mai există în design */
 
-/* grilă foarte fină în fundal */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--color-line) 45%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 45%, transparent) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black 0%, transparent 100%);
-}
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; }
+::selection { background: var(--color-accent); color: #fff; }
 
-:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 2px; }
-::selection { background: var(--color-accent-soft); color: var(--color-accent-text); }
-
+/* Slider pe fundal deschis (implicit) */
 input[type='range'] {
   appearance: none;
-  height: 4px;
-  border-radius: 9999px;
-  background: var(--color-line);
-  cursor: pointer;
   width: 100%;
+  height: 44px;               /* țintă de atingere */
+  margin: 0;
+  background: transparent;
+  cursor: ew-resize;
 }
+input[type='range']::-webkit-slider-runnable-track { height: 4px; border-radius: 4px; background: var(--color-line-strong); }
+input[type='range']::-moz-range-track { height: 4px; border-radius: 4px; background: var(--color-line-strong); }
 input[type='range']::-webkit-slider-thumb {
-  appearance: none;
-  width: 18px; height: 18px;
-  border-radius: 9999px;
-  background: var(--color-accent);
-  border: 3px solid var(--color-paper);
-  box-shadow: 0 1px 4px rgb(15 23 42 / 0.25);
+  appearance: none; width: 22px; height: 22px; margin-top: -9px; border-radius: 9999px;
+  background: var(--color-accent); border: 3px solid var(--color-paper); box-shadow: 0 0 0 2px var(--color-accent);
 }
 input[type='range']::-moz-range-thumb {
-  width: 18px; height: 18px;
-  border-radius: 9999px;
-  background: var(--color-accent);
-  border: 3px solid var(--color-paper);
-  box-shadow: 0 1px 4px rgb(15 23 42 / 0.25);
+  width: 16px; height: 16px; border-radius: 9999px;
+  background: var(--color-accent); border: 3px solid var(--color-paper); box-shadow: 0 0 0 2px var(--color-accent);
 }
+/* Slider pe panou închis: adaugă className="on-stage" */
+input[type='range'].on-stage::-webkit-slider-runnable-track { background: #3a3c42; }
+input[type='range'].on-stage::-moz-range-track { background: #3a3c42; }
+input[type='range'].on-stage::-webkit-slider-thumb { background: var(--color-thread); border-color: var(--color-stage); box-shadow: 0 0 0 2px var(--color-thread); }
+input[type='range'].on-stage::-moz-range-thumb { background: var(--color-thread); border-color: var(--color-stage); box-shadow: 0 0 0 2px var(--color-thread); }

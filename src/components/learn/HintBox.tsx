@@ -13,7 +13,7 @@ export interface HintStep {
 export function HintBox({ title = t.hint.title, steps }: { title?: string; steps: HintStep[] }) {
   const [shown, setShown] = useState(0)
   return (
-    <div className="rounded-2xl border border-line bg-paper-subtle p-5">
+    <div className="rounded-[6px] border border-line bg-paper-subtle p-5">
       <p className="flex items-center gap-2 font-mono text-xs tracking-wide text-accent-text uppercase">
         <Lightbulb size={14} aria-hidden /> {title}
       </p>

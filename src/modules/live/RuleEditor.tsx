@@ -48,7 +48,7 @@ export function RuleEditor({ onRule, externalError }: { onRule: (f: RuleFn) => v
             }}
             rows={9}
             spellCheck={false}
-            className="mt-1 w-full rounded-xl border border-line bg-paper-subtle p-3 font-mono text-[13px] leading-relaxed"
+            className="mt-1 w-full rounded-[6px] border border-line bg-paper-subtle p-3 font-mono text-[13px] leading-relaxed"
           />
         </label>
         <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -71,7 +71,7 @@ export function RuleEditor({ onRule, externalError }: { onRule: (f: RuleFn) => v
         </div>
         <p className="mt-2 text-xs text-ink-muted">{r.note}</p>
         {msg || externalError ? (
-          <p role="alert" className="mt-3 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800">{msg ?? live.errors.rule}</p>
+          <p role="alert" className="mt-3 rounded-[6px] border border-red-200 bg-red-50 p-3 text-sm text-red-800">{msg ?? live.errors.rule}</p>
         ) : null}
       </div>
       <HintBox title="Indicii pentru regulă" steps={r.hints} />

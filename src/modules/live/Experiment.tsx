@@ -23,7 +23,7 @@ export function Experiment({ current }: { current: State }) {
     <div>
       <p className="text-sm text-ink-muted">{ex.lead}</p>
 
-      <div className="mt-4 rounded-xl border border-line bg-paper-subtle p-4">
+      <div className="mt-4 rounded-[6px] border border-line bg-paper-subtle p-4">
         <p className="font-mono text-xs text-ink-muted">{ex.stepOf(step + 1, ex.steps.length)}</p>
         <p className="mt-1 font-medium">{s.text}</p>
         <p className="mt-1 text-sm text-ink-muted">
@@ -55,7 +55,7 @@ export function Experiment({ current }: { current: State }) {
       </div>
 
       {summary ? (
-        <div className="mt-4 space-y-3 rounded-xl border border-accent bg-accent-soft/40 p-4 text-sm leading-relaxed">
+        <div className="mt-4 space-y-3 rounded-[6px] border border-accent bg-accent-soft/40 p-4 text-sm leading-relaxed">
           <p className="font-semibold">{ex.summaryTitle}</p>
           <p>{falseN > missedN ? ex.verdictFalse : missedN > falseN ? ex.verdictMissed : ex.verdictBalanced}</p>
           <p>{ex.tradeoff}</p>

@@ -40,7 +40,7 @@ export function KernelLab({ src }: { src: Img }) {
     <div>
       <h3 className="text-xl font-bold tracking-tight">{kernelLab.title}</h3>
       <p className="mt-2 text-sm text-ink-muted">{kernelLab.lead}</p>
-      <pre className="mt-3 overflow-x-auto rounded-lg bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{kernelLab.formula}</pre>
+      <pre className="mt-3 overflow-x-auto rounded-[4px] bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{kernelLab.formula}</pre>
       <div className="mt-4 grid gap-6 lg:grid-cols-[220px_1fr]">
         <div>
           <div role="group" aria-label={kernelLab.title} className="grid grid-cols-3 gap-1.5">
@@ -53,18 +53,18 @@ export function KernelLab({ src }: { src: Img }) {
                 value={c}
                 aria-label={kernelLab.cell(Math.floor(idx / 3), idx % 3)}
                 onChange={(e) => setCells(cells.map((x, i) => (i === idx ? e.target.value : x)))}
-                className="w-full rounded-lg border border-line px-2 py-2 text-center font-mono text-sm"
+                className="w-full rounded-[4px] border border-line px-2 py-2 text-center font-mono text-sm"
               />
             ))}
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
             <label>
               <span className="block font-mono text-ink-muted">{kernelLab.divisor}</span>
-              <input type="number" step="any" value={divisor} onChange={(e) => setDivisor(e.target.value)} className="mt-1 w-full rounded-lg border border-line px-2 py-1.5 font-mono" />
+              <input type="number" step="any" value={divisor} onChange={(e) => setDivisor(e.target.value)} className="mt-1 w-full rounded-[4px] border border-line px-2 py-1.5 font-mono" />
             </label>
             <label>
               <span className="block font-mono text-ink-muted">{kernelLab.offset}</span>
-              <input type="number" step="any" value={offset} onChange={(e) => setOffset(e.target.value)} className="mt-1 w-full rounded-lg border border-line px-2 py-1.5 font-mono" />
+              <input type="number" step="any" value={offset} onChange={(e) => setOffset(e.target.value)} className="mt-1 w-full rounded-[4px] border border-line px-2 py-1.5 font-mono" />
             </label>
           </div>
           <p className="mt-3 font-mono text-xs text-ink-muted">

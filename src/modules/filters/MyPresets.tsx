@@ -54,7 +54,7 @@ export function MyPresets({ stack, onApply }: Props) {
             value={name}
             maxLength={40}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1 rounded-full border border-line px-4 py-2 text-sm"
+            className="mt-1 rounded-[4px] border border-line px-4 py-2 text-sm"
           />
         </label>
         <DemoButton variant="solid" onClick={save} disabled={stack.length === 0}>
@@ -89,7 +89,7 @@ export function MyPresets({ stack, onApply }: Props) {
           onChange={(e) => setJson(e.target.value)}
           rows={5}
           spellCheck={false}
-          className="mt-1 w-full rounded-xl border border-line bg-paper-subtle p-3 font-mono text-xs"
+          className="mt-1 w-full rounded-[6px] border border-line bg-paper-subtle p-3 font-mono text-xs"
         />
       </label>
       <div className="mt-2 flex items-center gap-3">

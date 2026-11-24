@@ -6,50 +6,55 @@ import { modules } from './modules'
 export function Layout() {
   const active = modules.filter((m) => m.status !== 'soon')
   return (
-    <div className="relative flex min-h-dvh flex-col">
+    <div className="flex min-h-dvh flex-col bg-ground">
       <a
         href="#continut"
         onClick={(e) => {
           e.preventDefault()
           document.getElementById('continut')?.focus()
         }}
-        className="sr-only z-50 rounded bg-paper px-3 py-2 focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
+        className="sr-only z-50 rounded-[4px] bg-paper px-3 py-2 focus:not-sr-only focus:fixed focus:top-2 focus:left-2"
       >
         {t.app.skip}
       </a>
-      <header className="relative z-20 border-b border-line bg-paper/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-6 py-3">
-          <NavLink to="/" end className="flex items-center gap-2 font-semibold tracking-tight">
-            <span aria-hidden className="grid h-6 w-6 grid-cols-2 gap-0.5">
-              <i className="rounded-[2px] bg-accent" />
-              <i className="rounded-[2px] bg-accent/40" />
-              <i className="rounded-[2px] bg-accent/40" />
-              <i className="rounded-[2px] bg-accent" />
+      <header className="border-b border-line bg-ground">
+        <div className="mx-auto flex min-h-[68px] max-w-[1280px] flex-wrap items-center justify-between gap-x-8 gap-y-3 px-5 min-[980px]:px-10">
+          <NavLink to="/" end className="flex items-center gap-3">
+            <span aria-hidden className="grid size-6 grid-cols-2 gap-0.5">
+              <i className="bg-ink" />
+              <i className="bg-accent" />
+              <i className="bg-accent" />
+              <i className="bg-ink" />
             </span>
-            {t.app.short}
+            <span className="font-display text-[19px] font-bold tracking-[-0.01em]">{t.app.short}</span>
           </NavLink>
-          <nav aria-label={t.app.nav} className="flex flex-wrap gap-1">
+          <nav aria-label={t.app.nav} className="flex flex-wrap gap-x-7 gap-y-1 text-[15px]">
             {active.map((m) => (
               <NavLink
                 key={m.id}
                 to={`/${m.path}`}
                 className={({ isActive }) =>
                   cx(
-                    'rounded-full px-3 py-1.5 text-sm transition-colors',
-                    isActive ? 'bg-accent-soft font-medium text-accent-text' : 'text-ink-muted hover:text-ink',
+                    'border-b-2 pt-[21px] pb-[19px] transition-colors',
+                    isActive ? 'border-accent font-medium text-ink' : 'border-transparent text-ink-muted hover:text-accent-hover',
                   )
                 }
               >
-                {m.title}
+                {m.nav}
               </NavLink>
             ))}
           </nav>
         </div>
       </header>
-      <main id="continut" tabIndex={-1} className="relative z-10 flex-1 outline-none">
+      <main id="continut" tabIndex={-1} className="flex-1 outline-none">
         <Outlet />
       </main>
-      <footer className="relative z-10 border-t border-line px-6 py-6 text-center font-mono text-xs text-ink-muted">{t.app.footer}</footer>
+      <footer className="border-t border-line">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap justify-between gap-x-6 gap-y-2 px-5 py-7 font-mono text-[13px] text-ink-faint min-[980px]:px-10">
+          <span>{t.app.footer}</span>
+          <span>Imagini de test: scikit-image, CC0</span>
+        </div>
+      </footer>
     </div>
   )
 }

@@ -1,54 +1,53 @@
 import { useId, useState } from 'react'
 import { t } from '../../content/ro'
-import { DemoButton, cx } from '../ui/primitives'
+import { cx } from '../ui/primitives'
 
 interface Props {
   question: string
   options: string[]
   correct: number
   explanation: string
+  /** variante scurte (numere) pe un rând, cu font mono */
+  compact?: boolean
 }
 
-/** Întrebare cu variante; răspunsul nu e afișat până nu verifici. */
-export function Quiz({ question, options, correct, explanation }: Props) {
-  const name = useId()
+/** Întrebare cu 3 variante; alegerea se verifică imediat. Corect: albastru de date; greșit: ink. Fără roșu/verde. */
+export function Quiz({ question, options, correct, explanation, compact = false }: Props) {
+  const id = useId()
   const [choice, setChoice] = useState<number | null>(null)
-  const [checked, setChecked] = useState(false)
-  const ok = checked && choice === correct
+  const ok = choice === correct
   return (
-    <fieldset className="rounded-2xl border border-line p-5">
-      <legend className="px-2 text-sm font-semibold">{question}</legend>
-      <div className="space-y-2">
-        {options.map((o, i) => (
-          <label
-            key={i}
-            className={cx(
-              'flex cursor-pointer items-center gap-3 rounded-xl border px-3 py-2 text-sm',
-              checked && i === correct ? 'border-accent bg-accent-soft' : 'border-line',
-            )}
-          >
-            <input
-              type="radio"
-              name={name}
-              checked={choice === i}
-              onChange={() => {
-                setChoice(i)
-                setChecked(false)
-              }}
-              className="accent-accent"
-            />
-            {o}
-          </label>
-        ))}
+    <div>
+      <p id={id} className="font-display max-w-[26em] text-2xl leading-tight font-bold tracking-[-0.015em]">
+        {question}
+      </p>
+      <div role="group" aria-labelledby={id} className={cx('mt-4 gap-2', compact ? 'flex flex-wrap' : 'flex max-w-[36em] flex-col')}>
+        {options.map((o, i) => {
+          const picked = choice === i
+          return (
+            <button
+              key={o}
+              type="button"
+              aria-pressed={picked}
+              onClick={() => setChoice(i)}
+              className={cx(
+                'min-h-[52px] cursor-pointer rounded-[4px] border-2 px-[18px] py-2.5 text-left text-base leading-snug text-ink transition-colors',
+                compact && 'min-w-24 font-mono text-lg',
+                picked ? (i === correct ? 'border-data bg-data-soft' : 'border-ink bg-band') : 'border-line-strong bg-paper hover:border-accent',
+              )}
+            >
+              {o}
+            </button>
+          )
+        })}
       </div>
-      <div className="mt-3 flex items-center gap-3">
-        <DemoButton disabled={choice === null} onClick={() => setChecked(true)}>
-          {t.quiz.check}
-        </DemoButton>
-        <p role="status" className="text-sm">
-          {checked ? (ok ? `${t.quiz.right} ${explanation}` : t.quiz.wrong) : ''}
-        </p>
-      </div>
-    </fieldset>
+      <p role="status" className="mt-3.5 min-h-12 max-w-[36em] text-base leading-normal text-ink-muted">
+        {choice === null ? null : (
+          <>
+            <b className="text-ink">{ok ? t.quiz.right : t.quiz.wrong}</b> {ok ? explanation : ''}
+          </>
+        )}
+      </p>
+    </div>
   )
 }

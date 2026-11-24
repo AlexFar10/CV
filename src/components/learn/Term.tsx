@@ -23,7 +23,7 @@ export function Term({ id, children }: { id: keyof typeof glossary | string; chi
         <span
           id={panel}
           role="note"
-          className="absolute top-full left-0 z-30 mt-1 block w-64 rounded-xl border border-line bg-paper p-3 text-left text-xs leading-relaxed font-normal text-ink shadow-lg"
+          className="absolute top-full left-0 z-30 mt-1 block w-64 rounded-[6px] border border-line bg-paper p-3 text-left text-xs leading-relaxed font-normal text-ink shadow-lg"
         >
           {def}
         </span>

@@ -1,15 +1,16 @@
 export const recap = {
-  kicker: 'Recapitulare',
+  kicker: '04 · Recapitulare',
   title: 'Pragul, de la pixeli la decizii',
-  lead: 'Ai întâlnit același truc în trei locuri. Un număr împarte lumea în „da” și „nu”, iar alegerea lui nu e o formalitate: e o decizie cu consecințe.',
+  lead: 'Un număr împarte lumea în „da” și „nu”. Alegerea lui e o decizie cu consecințe.',
+  ideaTitle: 'Ideea: același prag, de patru ori',
   thread: {
     kicker: 'Firul roșu',
     title: 'Același prag, trei forme',
     items: [
-      { to: '/filtre', place: 'Pe pixeli', text: 'Filtrul „Prag”: un pixel devine alb dacă luminanța lui trece de p, altfel negru.', where: 'Studio de filtre' },
-      { to: '/telefon', place: 'Pe mască', text: 'Modelul de portret dă o probabilitate pentru fiecare pixel; pragul decide ce e persoană și ce e fundal.', where: 'Portret cu fundal neclar' },
-      { to: '/live', place: 'Pe ochi', text: 'Sub un anumit EAR, ochii sunt „închiși”; peste o anumită durată, șoferul e „obosit”.', where: 'Ești atent la drum?' },
-      { to: '', place: 'Pe probabilitate', text: 'În partea 2, un model estimează cât de probabilă e o fractură; un prag decide când se cheamă medicul.', where: 'Partea 2: AI în medicină' },
+      { to: '/filtre', place: 'Pe pixeli', nav: 'Filtre', short: 'Un pixel devine alb dacă luminanța lui trece de p, altfel negru.', text: 'Filtrul „Prag”: un pixel devine alb dacă luminanța lui trece de p, altfel negru.', where: 'Studio de filtre' },
+      { to: '/telefon', place: 'Pe mască', nav: 'Telefonul', short: 'Pragul decide ce e persoană și ce e fundal.', text: 'Modelul de portret dă o probabilitate pentru fiecare pixel; pragul decide ce e persoană și ce e fundal.', where: 'Portret cu fundal neclar' },
+      { to: '/live', place: 'Pe ochi', nav: 'Ești atent la drum?', short: 'Sub un anumit EAR, ochii sunt „închiși”.', text: 'Sub un anumit EAR, ochii sunt „închiși”; peste o anumită durată, șoferul e „obosit”.', where: 'Ești atent la drum?' },
+      { to: '', place: 'Pe probabilitate', nav: '', short: 'Un prag decide când se cheamă medicul.', text: 'În partea 2, un model estimează cât de probabilă e o fractură; un prag decide când se cheamă medicul.', where: 'Partea 2: AI în medicină' },
     ],
     go: 'Deschide',
     soon: 'În curând',
@@ -17,7 +18,9 @@ export const recap = {
   lab: {
     kicker: 'Compromisul',
     title: 'Nu există un prag fără greșeli',
-    lead: 'Un model dă fiecărui caz un scor între 0 și 1. Cazurile fără problemă (gri) au scoruri mici, cele cu problemă (violet) scoruri mari, dar grupurile se suprapun. Mută pragul și numără greșelile.',
+    lead: 'Un model dă fiecărui caz un scor între 0 și 1. Cazurile fără problemă (gri) au scoruri mici, cele cu problemă (albastru) scoruri mari, dar grupurile se suprapun. Mută pragul și numără greșelile.',
+    stepTitle: 'Încearcă: nu există un prag fără greșeli',
+    closing: 'Mută pragul în sus: alarmele false scad, dar cele ratate cresc. Invers, la fel.',
     thr: 'prag pe scor',
     cost: 'cât de grav e o alarmă ratată față de una falsă',
     costFmt: (v: number) => `de ${v} ori`,
@@ -38,7 +41,14 @@ export const recap = {
     correct: 1,
     explanation: 'Un prag mic declanșează alarma aproape la orice, deci prinde aproape tot, dar și multe cazuri sănătoase sunt semnalate.',
   },
+  more: {
+    title: 'Costul unei alarme ratate, presete și pragul optim',
+    text: 'Pentru cei curioși: cât de grav e o alarmă ratată față de una falsă, și ce prag iese cel mai ieftin. Stă pe o pagină separată.',
+    link: 'Deschide pagina avansată',
+  },
   part2: {
+    badge: 'Ce urmează · partea 2',
+    short: 'Același prag, pe un caz medical: fracturi de încheietură la copii. Scorul e probabilitatea dată de un model.',
     title: 'Ce urmează: partea 2',
     text: 'În partea a doua, aceleași componente (imagini, histograme, praguri) vor fi folosite pentru un caz medical: detecția fracturilor de încheietură la copii. Acolo scorul e probabilitatea dată de un model, iar pragul decide cine ajunge mai repede la medic.',
   },

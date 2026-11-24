@@ -162,3 +162,58 @@ export const panorama = {
   title: 'Panorama',
   text: 'Cum se lipesc mai multe poze într-una singură. Apare într-o versiune următoare.',
 }
+
+/** Pagina simplă „Cum face telefonul poza asta?” (două taburi, fiecare cu un slider). */
+export const phoneSimple = {
+  kicker: '02 · Partea 1',
+  title: 'Cum face telefonul poza asta?',
+  lead: 'Două trucuri din telefon, fiecare cu un singur slider.',
+  tabsLabel: 'Alege demo-ul',
+  tabs: { night: 'Mod noapte', portrait: 'Portret' },
+  steps: { idea: 'Ideea', try: 'Încearcă', check: 'Verifică-te' },
+  more: { title: 'Zgomot, lumină, mână care tremură, mască de mână și multe altele', text: 'Pentru cei curioși: toate setările de la modul noapte, masca făcută de mână și pașii portretului stau pe o pagină separată.', link: 'Deschide pagina avansată' },
+  panorama: 'Panorama (lipirea mai multor poze într-una) apare într-o versiune următoare.',
+  night: {
+    idea: [
+      'Pe întuneric, fiecare cadru e plin de zgomot aleator.',
+      'Zgomotul e diferit de la un cadru la altul, imaginea reală nu.',
+      'Media mai multor cadre anulează zgomotul și păstrează imaginea.',
+    ],
+    slider: 'câte cadre mediem (N)',
+    single: 'Un cadru',
+    merged: (n: number) => `Media a ${n} ${n === 1 ? 'cadru' : 'cadre'}`,
+    result: 'Rezultat',
+    error: (a: string, b: string) => `Eroare (MSE): ${a} → ${b}`,
+    alt1: 'Un singur cadru, luminat, cu mult zgomot',
+    alt2: 'Rezultatul după medierea cadrelor',
+    quiz: {
+      question: 'Mediezi 4 cadre în loc de unul. Cât scade (aproximativ) zgomotul?',
+      options: ['De 2 ori (√4)', 'De 4 ori', 'Deloc'],
+      correct: 0,
+      explanation: 'Zgomotul scade cu √N: la 4 cadre, de 2 ori; la 16 cadre, de 4 ori.',
+    },
+  },
+  portrait: {
+    idea: [
+      'Un model dă fiecărui pixel o probabilitate că e persoană.',
+      'Un prag decide: peste prag = persoană, sub prag = fundal.',
+      'Fundalul se încețoșează, persoana rămâne clară.',
+    ],
+    original: 'Original',
+    result: 'Rezultat',
+    slider: 'pragul măștii (probabilitate)',
+    run: 'Rulează modelul',
+    running: 'Se încarcă modelul…',
+    note: 'La prima rulare se încarcă local ~15 MB (wasm + model). Imaginea nu părăsește browserul.',
+    placeholder: 'Rulează modelul ca să vezi masca.',
+    covered: (p: string) => `${p}% din pixeli sunt „persoană”`,
+    alt1: 'Imaginea originală a portretului',
+    alt2: 'Portretul cu fundalul încețoșat, după masca modelului',
+    quiz: {
+      question: 'Pragul măștii e foarte mic (0,05). Ce se întâmplă?',
+      options: ['În mască intră și bucăți din fundal', 'Dispar bucăți din persoană', 'Nu se schimbă nimic'],
+      correct: 0,
+      explanation: 'Aproape orice pixel trece de un prag atât de mic, deci și o parte din fundal rămâne clară.',
+    },
+  },
+}

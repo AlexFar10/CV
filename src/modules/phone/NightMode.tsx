@@ -70,7 +70,7 @@ export function NightMode() {
               {night.single} ↔ {night.merged(n, modeName)}
             </p>
             {ghosts ? (
-              <p role="status" className="mt-3 rounded-xl border border-line bg-accent-soft/60 p-3 text-sm">
+              <p role="status" className="mt-3 rounded-[6px] border border-line bg-accent-soft/60 p-3 text-sm">
                 {night.ghosts}
               </p>
             ) : null}
@@ -114,7 +114,7 @@ export function NightMode() {
             </div>
           ) : null}
           <p className="max-w-3xl text-sm text-ink-muted">{night.how}</p>
-          <pre className="overflow-x-auto rounded-lg bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{night.formulas}</pre>
+          <pre className="overflow-x-auto rounded-[4px] bg-paper-subtle px-3 py-2 font-mono text-[12px] whitespace-pre-wrap">{night.formulas}</pre>
           <FinePrint>{night.mseNote}</FinePrint>
         </div>
       </More>
@@ -148,7 +148,7 @@ export function NightMode() {
 function Thumb({ img, label }: { img: Img; label: string }) {
   return (
     <figure>
-      <ImageCanvas img={img} className="w-full rounded-lg border border-line" role="img" aria-label={label} />
+      <ImageCanvas img={img} className="w-full rounded-[4px] border border-line" role="img" aria-label={label} />
       <figcaption className="mt-1 text-center font-mono text-[11px] text-ink-muted">{label}</figcaption>
     </figure>
   )
@@ -156,7 +156,7 @@ function Thumb({ img, label }: { img: Img; label: string }) {
 
 function Metric({ title, mse: m, snr: s, strong }: { title: string; mse: number; snr: number; strong?: boolean }) {
   return (
-    <div className={`rounded-xl border p-3 ${strong ? 'border-accent bg-accent-soft/50' : 'border-line'}`}>
+    <div className={`rounded-[6px] border p-3 ${strong ? 'border-accent bg-accent-soft/50' : 'border-line'}`}>
       <p className="text-xs text-ink-muted">{title}</p>
       <p className="mt-1">MSE {m.toFixed(1).replace('.', ',')}</p>
       <p>SNR {s.toFixed(1).replace('.', ',')} dB</p>

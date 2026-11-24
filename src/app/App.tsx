@@ -25,9 +25,13 @@ export function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
-            {modules.map((m) => {
+            {modules.flatMap((m) => {
               const C = m.component
-              return C ? <Route key={m.id} path={m.path} element={<C />} /> : null
+              const A = m.advanced
+              return [
+                C ? <Route key={m.id} path={m.path} element={<C />} /> : null,
+                A ? <Route key={`${m.id}-adv`} path={`${m.path}/avansat`} element={<A />} /> : null,
+              ]
             })}
             <Route path="*" element={<NotFound />} />
           </Route>

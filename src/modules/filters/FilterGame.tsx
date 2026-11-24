@@ -31,7 +31,7 @@ export function FilterGame() {
 
   if (finished) {
     return (
-      <div role="status" className="rounded-2xl border border-line p-6 text-center">
+      <div role="status" className="rounded-[6px] border border-line p-6 text-center">
         <p className="font-mono text-xs text-ink-muted">{game.score}</p>
         <p className="mt-1 text-5xl font-bold tracking-tight">
           {score} / {rounds.length}
@@ -67,7 +67,7 @@ export function FilterGame() {
                   if (o === r.answer) setScore((s) => s + 1)
                 }}
                 className={cx(
-                  'cursor-pointer rounded-xl border px-4 py-3 text-left text-sm font-medium transition-colors',
+                  'cursor-pointer rounded-[6px] border px-4 py-3 text-left text-sm font-medium transition-colors',
                   correct ? 'border-accent bg-accent-soft' : wrong ? 'border-red-400 bg-red-50' : 'border-line hover:border-accent',
                 )}
               >

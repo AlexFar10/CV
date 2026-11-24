@@ -34,7 +34,7 @@ export function PixelInspector({ before, after, pos, neighborhood = false }: Pro
   const a = pos ? rgb(before, pos.x, pos.y) : null
   const b = pos ? rgb(after, pos.x, pos.y) : null
   return (
-    <div className="rounded-2xl border border-line bg-paper-subtle p-4" aria-live="off">
+    <div className="rounded-[6px] border border-line bg-paper-subtle p-4" aria-live="off">
       <p className="mb-3 font-mono text-xs tracking-wide text-accent-text uppercase">{t.inspector.title}</p>
       {pos && a && b ? (
         <div className="space-y-3">
