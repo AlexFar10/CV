@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', monospace;
+
+  --color-paper: #ffffff;
+  --color-paper-subtle: #fafafa;
+  --color-ink: #0f172a;
+  --color-ink-muted: #475569;
+  --color-line: #e2e8f0;
+
+  --color-accent: #4f46e5;
+  --color-accent-soft: #eef2ff;
+  --color-accent-text: #4338ca;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* grilă foarte fină în fundal */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-line) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 45%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, black 0%, transparent 100%);
+}
+
+:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 2px; border-radius: 2px; }
+::selection { background: var(--color-accent-soft); color: var(--color-accent-text); }
+
+input[type='range'] {
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--color-line);
+  cursor: pointer;
+  width: 100%;
+}
+input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  border: 3px solid var(--color-paper);
+  box-shadow: 0 1px 4px rgb(15 23 42 / 0.25);
+}
+input[type='range']::-moz-range-thumb {
+  width: 18px; height: 18px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  border: 3px solid var(--color-paper);
+  box-shadow: 0 1px 4px rgb(15 23 42 / 0.25);
+}
